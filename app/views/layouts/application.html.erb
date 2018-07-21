@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% if @post.nil? %>
+      <title>Eiwa - Yet Another Blog Engine</title>
+    <% else %>
+      <% if @post.respond_to? :title %>
+        <title>Eiwa - Yet Another Blog Engine</title>
+      <% end %>
+    <% end %>
+
+    <link rel="icon" href="<%= asset_url("favicon.ico") %>" type="image/x-icon">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- <%= stylesheet_link_tag    'application', media: 'all', 'data&#45;turbolinks&#45;track': 'reload' %> -->
+    <!-- <%= javascript_include_tag 'application', 'data&#45;turbolinks&#45;track': 'reload' %> -->
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

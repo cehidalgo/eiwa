@@ -1,0 +1,42 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On OS X with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem 'pg'
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: eiwa_development
+  username: <%= ENV['EIWA_DATABASE_USERNAME']%>
+  password: <%= ENV['EIWA_DATABASE_PASSWORD'] %>
+  host: localhost
+  port: 5432
+  schema_search_path: myapp,sharedapp,public
+  min_messages: notice
+
+test:
+  <<: *default
+  database: eiwa_test
+  production:
+    url: <%= ENV['EIWA_DATABASE_URL'] %>
+
+production:
+  <<: *default
+  database: eiwa_production
+  username: <%= ENV['EIWA_DATABASE_USERNAME']%>
+  password: <%= ENV['EIWA_DATABASE_PASSWORD'] %>
